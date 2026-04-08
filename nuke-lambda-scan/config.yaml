@@ -1,0 +1,69 @@
+regions:
+  - "all" #全リージョンを対象とする
+
+account-blocklist:
+  - "999999999999"
+
+resource-types:
+  includes: #target非推奨のためincludedsで設定
+#  includesはいちいち指定せんでOK。除外リソース以外指定したい場合は記載なしでOK
+
+    # --- コンピューティング系 (高額になりやすい) ---
+    - EC2Instance
+    - EC2AutoScalingGroup
+    - EC2LaunchTemplate
+    - EC2TargetGroup
+    - EC2NetworkLoadBalancer
+    - EC2ApplicationLoadBalancer
+    - EKSCluster
+    - ECSCluster
+    - ECSService
+    - LambdaFunction
+
+    # --- ストレージ系 ---
+    - S3Bucket
+    - EBSVolume
+
+    # --- データベース系 ---
+    - RDSInstance
+    - RDSCluster
+    - DynamoDBTable
+    - ElastiCacheCluster
+    - RedshiftCluster
+    - OpenSearchDomain
+
+    # --- ネットワーク系 (特にNATGateway) ---
+    - NATGateway
+    - ElasticIP
+    - VPCEndpoint
+
+    # --- その他、課金が発生するサービス ---
+    - CloudFrontDistribution
+    - EMRCluster
+    - SageMakerNotebookInstance
+  excludes: #対象外
+    - IAMUser
+    - IAMUserPolicy
+    - IAMUserPolicyAttachment
+    - IAMGroup
+    - IAMGroupPolicy
+    - IAMGroupPolicyAttachment
+    - IAMRole
+    - IAMRolePolicy
+    - IAMRolePolicyAttachment
+    - IAMPolicy
+    - IAMInstanceProfile
+    - IAMServiceCertificate
+
+accounts:
+  "123456789012":
+    filters:
+      __global__:
+        # 1. ownerタグが自分の識別値のものは削除しない
+        - property: "tag:owner"
+          value: "member-a"
+        - property: "tag:owner"
+          value: "member-b"
+        - property: "tag:owner"
+          value: "member-c"
+
