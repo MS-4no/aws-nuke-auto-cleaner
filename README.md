@@ -10,6 +10,9 @@ nuke-lambda-scan/    ... Dry Run（スキャン）用 Lambda
 nuke-lambda-delete/  ... Actual Run（削除実行）用 Lambda
 ```
 
+## 構成図
+<img width="736" height="704" alt="image" src="https://github.com/user-attachments/assets/323a0f5b-ea17-4f71-8f4d-cf41b5ba13a2" />
+
 ## 全体の流れ
 
 ```
